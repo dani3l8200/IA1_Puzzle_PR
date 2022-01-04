@@ -1,0 +1,45 @@
+<html lang="en">
+
+<head>
+      <title>Puzzle Best First</title>
+      <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+      <script type="text/javascript" src="04_bestfirst.js"></script>
+
+</head>
+
+<body style="background: linear-gradient(to right, rgb(242, 255, 0), rgb(0, 179, 255) )"> 
+      <h1>Juan Daniel Enrique Roman Barrientos</h1>
+      <h2>201801364</h2>
+      <img src="./orderSucessors.png" alt="">
+      <div id="mynetwork"></div>
+      <script type="text/javascript">
+            // create a network
+            var container = document.getElementById("mynetwork");
+            var DOTstring = puzzle()
+            var parsedData = vis.parseDOTNetwork(DOTstring);
+            var data = {
+                  nodes: parsedData.nodes,
+                  edges: parsedData.edges
+            }
+            var options = {
+                  layout: {
+                        hierarchical: {
+                              levelSeparation: 100,
+                              nodeSpacing: 100,
+                              parentCentralization: true,
+                              direction: 'UD',        // UD, DU, LR, RL
+                              sortMethod: 'directed',  // hubsize, directed
+                              shakeTowards: 'roots'  // roots, leaves                        
+                        },
+                  },
+            };
+
+            options.nodes = {
+                  color: 'magenta'
+            }
+
+            var network = new vis.Network(container, data, options);
+      </script>
+</body>
+
+</html>
